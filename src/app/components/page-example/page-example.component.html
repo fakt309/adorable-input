@@ -1,25 +1,13 @@
-<div class="test-square">
-	<!-- <input type="text" (focus)="onFocus($event)" (blur)="onBlur($event)" /> -->
+<!-- <div class="test-square">
 
-	<!-- <div style="height:1000px"></div>
+</div> -->
 
-	<vg-input></vg-input>
-
-	@for (output of outputs; track output) {
-		<div class="output__text">{{ output }}</div>
-	}
-
-	<div style="height:1000px"></div> -->
-
-	<input type="text" class="input-test" (focus)="onFocus($event)" (blur)="onBlur($event)" />
-
-	<div
-		[style.left.px]="testingWindow.x"
-		[style.top.px]="testingWindow.y"
-		[style.width.px]="testingWindow.width"
-		[style.height.px]="testingWindow.height"
-		class="testing-window">
-			<div style="width:50px;height:50px;background-color:#00FF00;"></div>
-	</div>
-
+<div
+	[style.left.px]="testingWindow.x"
+	[style.top.px]="testingWindow.y"
+	[style.width.px]="testingWindow.width"
+	[style.height.px]="testingWindow.height"
+	class="testing-window"
+>
+	<div type="text" class="input-test" contenteditable="true"></div>
 </div>

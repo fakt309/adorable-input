@@ -23,7 +23,9 @@
 
 	.testing-window {
 		position: absolute;
-		background-color: #ff000033;
+		background-color: #000000;
+		outline: 3px solid #FFFF00;
+		outline-offset: -20px;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -32,6 +34,9 @@
 
 	.input-test {
 		z-index: 100;
+		width: 100px;
+		height: 30px;
+		background-color: #ffffff;
 		// font-size: 18px;
 	}
 }
