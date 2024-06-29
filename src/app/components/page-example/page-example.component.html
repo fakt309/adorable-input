@@ -1,7 +1,7 @@
 <div class="test-square">
 	<!-- <input type="text" (focus)="onFocus($event)" (blur)="onBlur($event)" /> -->
 
-	<div style="height:1000px"></div>
+	<!-- <div style="height:1000px"></div>
 
 	<vg-input></vg-input>
 
@@ -9,6 +9,13 @@
 		<div class="output__text">{{ output }}</div>
 	}
 
-	<div style="height:1000px"></div>
+	<div style="height:1000px"></div> -->
+
+	<div
+		[style.left.px]="testingWindow.x"
+		[style.top.px]="testingWindow.y"
+		[style.width.px]="testingWindow.width/2"
+		[style.height.px]="testingWindow.height/2"
+		class="testing-window"></div>
 
 </div>
