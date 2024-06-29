@@ -23,7 +23,7 @@
 
 	.testing-window {
 		position: absolute;
-		background-color: #000000;
+		background-color: #ff000033;
 		outline: 3px solid #FFFF00;
 		outline-offset: -20px;
 		display: flex;
@@ -37,6 +37,7 @@
 		width: 100px;
 		height: 30px;
 		background-color: #ffffff;
+		font-size: 12px;
 		// font-size: 18px;
 	}
 }

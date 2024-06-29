@@ -160,7 +160,7 @@ export class PageExampleComponent implements OnInit {
   ngOnInit(): void {
     setInterval(() => {
       this.setSizeTesting()
-    }, 5)
+    }, 0)
     
     // this.detectDevice()
     // this.initialWindowInner = window.innerHeight
