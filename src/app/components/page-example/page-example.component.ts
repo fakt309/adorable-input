@@ -16,11 +16,9 @@ export class PageExampleComponent implements OnInit {
   onFocus(e: any): void {
     setTimeout(() => {
       this.outputs.push(`
-        focus  ||| 
-        now window: ${window.innerHeight}  ||| 
-        initial window: ${this.initialWindowInner}  ||| 
-        now visualViewport: ${window.visualViewport?.height || 0}  ||| 
-        initial visualViewport: ${this.initialVisualViewport}
+        focus
+        now: ${window.visualViewport?.height || 0} ||| 
+        initial: ${this.initialVisualViewport}
       `)
     }, 500)
     
@@ -30,10 +28,8 @@ export class PageExampleComponent implements OnInit {
     setTimeout(() => {
       this.outputs.push(`
         unfocus  ||| 
-        now window: ${window.innerHeight}  ||| 
-        initial window: ${this.initialWindowInner}  ||| 
-        now visualViewport: ${window.visualViewport?.height || 0}  ||| 
-        initial visualViewport: ${this.initialVisualViewport}
+        now: ${window.visualViewport?.height || 0} ||| 
+        initial: ${this.initialVisualViewport}
       `)
     }, 500)
   }
