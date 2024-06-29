@@ -11,13 +11,15 @@
 
 	<div style="height:1000px"></div> -->
 
-	<input type="text" class="input-test" />
+	<input type="text" class="input-test" (focus)="onFocus($event)" (blur)="onBlur($event)" />
 
 	<div
 		[style.left.px]="testingWindow.x"
 		[style.top.px]="testingWindow.y"
 		[style.width.px]="testingWindow.width/2"
 		[style.height.px]="testingWindow.height/2"
-		class="testing-window"></div>
+		class="testing-window">
+			<div style="width:50px;height:50px;background-color:#00FF00;"></div>
+	</div>
 
 </div>

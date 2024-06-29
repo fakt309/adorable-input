@@ -21,26 +21,34 @@ export class PageExampleComponent implements OnInit {
   // initialVisualViewport: number = 0
   outputs: Array<string> = []
 
-  // onFocus(e: any): void {
-  //   setTimeout(() => {
-  //     this.outputs.push(`
-  //       focus
-  //       now: ${window.visualViewport?.height || 0} ||| 
-  //       initial: ${this.initialVisualViewport}
-  //     `)
-  //   }, 2000)
-    
-  // }
+  onFocus(e: any): void {
+    setTimeout(() => {
+      this.setSizeTesting()
+    }, 500)
 
-  // onBlur(e: any): void {
-  //   setTimeout(() => {
-  //     this.outputs.push(`
-  //       unfocus  ||| 
-  //       now: ${window.visualViewport?.height || 0} ||| 
-  //       initial: ${this.initialVisualViewport}
-  //     `)
-  //   }, 2000)
-  // }
+    // setTimeout(() => {
+    //   this.outputs.push(`
+    //     focus
+    //     now: ${window.visualViewport?.height || 0} ||| 
+    //     initial: ${this.initialVisualViewport}
+    //   `)
+    // }, 2000)
+    
+  }
+
+  onBlur(e: any): void {
+    setTimeout(() => {
+      this.setSizeTesting()
+    }, 500)
+    
+    // setTimeout(() => {
+    //   this.outputs.push(`
+    //     unfocus  ||| 
+    //     now: ${window.visualViewport?.height || 0} ||| 
+    //     initial: ${this.initialVisualViewport}
+    //   `)
+    // }, 2000)
+  }
 
   // detectDevice(): void {
   //   let nVer = navigator.appVersion;
