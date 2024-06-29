@@ -1,3 +1,7 @@
 <div class="test-square">
-	<input type="text" />
+	<input type="text" (focus)="onFocus($event)" (blur)="onBlur($event)" />
+
+	@for (output of outputs; track output) {
+		<div class="output__text">{{ output }}</div>
+	}
 </div>
