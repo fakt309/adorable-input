@@ -159,9 +159,9 @@ export class PageExampleComponent implements OnInit {
 
   ngOnInit(): void {
     setInterval(() => {
-
+      this.setSizeTesting()
     }, 200)
-    this.setSizeTesting()
+    
     // this.detectDevice()
     // this.initialWindowInner = window.innerHeight
     // this.initialVisualViewport = window.visualViewport?.height || 0
