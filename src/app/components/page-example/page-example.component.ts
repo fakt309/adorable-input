@@ -9,19 +9,24 @@ import { Component, OnInit } from '@angular/core'
 })
 export class PageExampleComponent implements OnInit {
 
-  initailHeight: number = 0
+  initialHeight: number = 0
   outputs: Array<string> = []
 
   onFocus(e: any): void {
-    this.outputs.push(`focus (now: ${window.innerHeight}, initial: ${this.initailHeight})`)
+    setTimeout(() => {
+      this.outputs.push(`focus (now: ${window.innerHeight}, initial: ${this.initialHeight})`)
+    }, 500)
+    
   }
 
   onBlur(e: any): void {
-    this.outputs.push(`unfocus (now: ${window.innerHeight}, initial: ${this.initailHeight})`)
+    setTimeout(() => {
+      this.outputs.push(`unfocus (now: ${window.innerHeight}, initial: ${this.initialHeight})`)
+    }, 500)
   }
 
   ngOnInit(): void {
-    this.initailHeight = window.innerHeight
+    this.initialHeight = window.innerHeight
   }
 
 }
