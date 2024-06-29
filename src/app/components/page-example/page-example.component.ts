@@ -9,24 +9,38 @@ import { Component, OnInit } from '@angular/core'
 })
 export class PageExampleComponent implements OnInit {
 
-  initialHeight: number = 0
+  initialWindowInner: number = 0
+  initialVisualViewport: number = 0
   outputs: Array<string> = []
 
   onFocus(e: any): void {
     setTimeout(() => {
-      this.outputs.push(`focus (now: ${window.innerHeight}, initial: ${this.initialHeight})`)
+      this.outputs.push(`
+        focus  ||| 
+        now window: ${window.innerHeight}  ||| 
+        initial window: ${this.initialWindowInner}  ||| 
+        now visualViewport: ${window.visualViewport?.height || 0}  ||| 
+        initial visualViewport: ${this.initialVisualViewport}
+      `)
     }, 500)
     
   }
 
   onBlur(e: any): void {
     setTimeout(() => {
-      this.outputs.push(`unfocus (now: ${window.innerHeight}, initial: ${this.initialHeight})`)
+      this.outputs.push(`
+        unfocus  ||| 
+        now window: ${window.innerHeight}  ||| 
+        initial window: ${this.initialWindowInner}  ||| 
+        now visualViewport: ${window.visualViewport?.height || 0}  ||| 
+        initial visualViewport: ${this.initialVisualViewport}
+      `)
     }, 500)
   }
 
   ngOnInit(): void {
-    this.initialHeight = window.innerHeight
+    this.initialWindowInner = window.innerHeight
+    this.initialVisualViewport = window.visualViewport?.height || 0
   }
 
 }
