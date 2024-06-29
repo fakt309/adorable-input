@@ -1,7 +1,14 @@
 <div class="test-square">
-	<input type="text" (focus)="onFocus($event)" (blur)="onBlur($event)" />
+	<!-- <input type="text" (focus)="onFocus($event)" (blur)="onBlur($event)" /> -->
+
+	<div style="height:1000px"></div>
+
+	<vg-input></vg-input>
 
 	@for (output of outputs; track output) {
 		<div class="output__text">{{ output }}</div>
 	}
+
+	<div style="height:1000px"></div>
+
 </div>
