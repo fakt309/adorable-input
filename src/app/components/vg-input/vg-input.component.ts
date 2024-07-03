@@ -82,8 +82,8 @@ export class VgInputComponent implements ControlValueAccessor, OnInit, OnDestroy
 
   onClickInput(): void {
     this.modal.visible = true
-    this.textarea.nativeElement.focus()
     setTimeout(() => {
+      this.textarea.nativeElement.focus()
       this.setSizeTextarea()
     }, 0)
     this.intervalRefresh = setInterval(() => { this.refresh() })
