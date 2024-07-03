@@ -16,6 +16,17 @@ export class PageExampleComponent implements OnInit {
 
   control: FormControl = new FormControl('testing testing testing testing testing testing testing testing testing')
 
+  rule: (t1: string) => Promise<{ success: boolean; error: string }> = async (value: string): Promise<{ success: boolean; error: string }> => new Promise((res) => {
+    if (value.length < 3) {
+      res({ success: false, error: 'length less then 3' })
+    } else if (value.length > 10) {
+      res({ success: false, error: 'more than 10' })
+    } else {
+      res({ success: true, error: '' })
+    }
+
+  })
+
   testingWindow: any = { x: 0, y: 0, width: 0, height: 0 }
 
   inputControl: FormControl = new FormControl()

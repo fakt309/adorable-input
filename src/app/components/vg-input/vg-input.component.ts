@@ -1,10 +1,11 @@
-import { Component, forwardRef, OnInit, ViewChild, ElementRef, HostListener, OnDestroy } from '@angular/core'
+import { Component, forwardRef, OnInit, ViewChild, ElementRef, HostListener, OnDestroy, Input } from '@angular/core'
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormsModule } from '@angular/forms'
+import { CommonModule } from '@angular/common'
 
 @Component({
   selector: 'vg-input',
   standalone: true,
-  imports: [ FormsModule ],
+  imports: [ FormsModule, CommonModule ],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -19,10 +20,17 @@ export class VgInputComponent implements ControlValueAccessor, OnInit, OnDestroy
 
   @ViewChild('textarea', { read: ElementRef }) textarea!: ElementRef
 
+  @Input() title: string = ''
+  @Input() rule: (t1: string) => Promise<{ success: boolean; error: string }> = async (value: string): Promise<{ success: boolean; error: string }> => new Promise((res) => {
+    res({ success: true, error: '' })
+  })
+
   value: string = ''
   onChange: Function = () => {}
   onTouched: Function = () => {}
   disabled: boolean = false
+
+  error: string = ''
 
   modal: { x: number, y: number, w: number, h: number, visible: boolean } = { x: 0, y: 0, w: 0, h: 0, visible: false }
 
@@ -31,6 +39,7 @@ export class VgInputComponent implements ControlValueAccessor, OnInit, OnDestroy
   intervalRefresh: any = null
 
   prevHeight: number = window.visualViewport?.height || 0
+  prevBodyOverflow: string = ''
 
   @HostListener('window:resize') onResize(): void {
     if (this.modal.visible) {
@@ -73,6 +82,15 @@ export class VgInputComponent implements ControlValueAccessor, OnInit, OnDestroy
     this.prevHeight = h
   }
 
+  async checkError(): Promise<void> {
+    const result = await this.rule(this.value)
+    if (result.success) {
+      this.error = ''
+    } else {
+      this.error = result.error
+    }
+  }
+
   setSizeModal(): void {
     let w = window.visualViewport?.width || 0
     let h = window.visualViewport?.height || 0
@@ -90,7 +108,10 @@ export class VgInputComponent implements ControlValueAccessor, OnInit, OnDestroy
   }
 
   showModal(): void {
+    this.prevBodyOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
     this.modal.visible = true
+    this.checkError()
     setTimeout(() => {
       this.textarea.nativeElement.focus()
       this.textarea.nativeElement.setSelectionRange(this.value.length, this.value.length)
@@ -103,6 +124,7 @@ export class VgInputComponent implements ControlValueAccessor, OnInit, OnDestroy
   }
 
   hideModal(): void {
+    document.body.style.overflow = this.prevBodyOverflow
     this.modal.visible = false
     clearInterval(this.intervalRefresh)
     this.textarea.nativeElement.blur()
@@ -115,11 +137,19 @@ export class VgInputComponent implements ControlValueAccessor, OnInit, OnDestroy
 
   onInputTextarea(e: any): void {
 
+    let value: string = e.target.value
+
+    this.value = value
+
     this.setSizeTextarea()
+    this.checkError()
+    
+    this.onChange(value)
 
   }
 
   ngOnInit(): void {
+    this.checkError()
     this.setSizeModal()
   }
 

@@ -1,4 +1,8 @@
-<div class="input" (click)="onClickInput($event)">{{ value }}</div>
+<div
+	class="input"
+	[class.input_error]="error !== ''"
+	(click)="onClickInput($event)"
+>{{ value }}</div>
 
 @if (modal.visible) {
 	<div
@@ -9,8 +13,8 @@
 		class="modal"
 	>
 		<div class="info">
-			<div class="title">введите имя</div>
-			<div class="rule">1 < 5 < 30</div>
+			<div class="title">{{ title }}</div>
+			@if (error !== '') { <div class="rule">{{ error }}</div> }
 		</div>
 		<textarea
 			#textarea
