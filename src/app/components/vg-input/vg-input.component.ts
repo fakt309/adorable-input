@@ -58,6 +58,7 @@ export class VgInputComponent implements ControlValueAccessor, OnInit, OnDestroy
 
     if (this.prevHeight !== h) {
       this.modal.visible = false
+      clearInterval(this.intervalRefresh)
     }
 
     this.prevHeight = h
@@ -84,6 +85,7 @@ export class VgInputComponent implements ControlValueAccessor, OnInit, OnDestroy
     setTimeout(() => {
       this.setSizeTextarea()
     }, 0)
+    this.intervalRefresh = setInterval(() => { this.refresh() })
   }
 
   onInputTextarea(e: any): void {
@@ -96,11 +98,8 @@ export class VgInputComponent implements ControlValueAccessor, OnInit, OnDestroy
     this.setSizeModal()
 
     this.textarea.nativeElement.focus()
-    this.intervalRefresh = setInterval(() => { this.refresh() })
   }
 
-  ngOnDestroy(): void {
-    clearInterval(this.intervalRefresh)
-  }
+  ngOnDestroy(): void { }
 
 }
