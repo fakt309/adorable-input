@@ -62,6 +62,7 @@ export class VgInputComponent implements ControlValueAccessor, OnInit, OnDestroy
     if (this.prevHeight !== h) {
       this.modal.visible = false
       clearInterval(this.intervalRefresh)
+      this.textarea.nativeElement.blur()
     }
 
     this.prevHeight = h
@@ -88,6 +89,7 @@ export class VgInputComponent implements ControlValueAccessor, OnInit, OnDestroy
     this.modal.visible = true
     setTimeout(() => {
       this.textarea.nativeElement.focus()
+      this.textarea.nativeElement.setSelectionRange(this.value.length, this.value.length)
       this.setSizeTextarea()
       setTimeout(() => {
         this.prevHeight = window.visualViewport?.height || 0
