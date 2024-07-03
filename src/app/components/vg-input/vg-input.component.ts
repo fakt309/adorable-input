@@ -82,6 +82,7 @@ export class VgInputComponent implements ControlValueAccessor, OnInit, OnDestroy
 
   onClickInput(): void {
     this.modal.visible = true
+    this.textarea.nativeElement.focus()
     setTimeout(() => {
       this.setSizeTextarea()
     }, 0)
@@ -96,8 +97,6 @@ export class VgInputComponent implements ControlValueAccessor, OnInit, OnDestroy
 
   ngOnInit(): void {
     this.setSizeModal()
-
-    this.textarea.nativeElement.focus()
   }
 
   ngOnDestroy(): void { }
