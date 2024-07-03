@@ -95,6 +95,7 @@ export class VgInputComponent implements ControlValueAccessor, OnInit, OnDestroy
   ngOnInit(): void {
     this.setSizeModal()
 
+    this.textarea.nativeElement.focus()
     this.intervalRefresh = setInterval(() => { this.refresh() })
   }
 
