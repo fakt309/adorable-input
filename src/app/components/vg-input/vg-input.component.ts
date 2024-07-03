@@ -33,8 +33,10 @@ export class VgInputComponent implements ControlValueAccessor, OnInit, OnDestroy
   prevHeight: number = window.visualViewport?.height || 0
 
   @HostListener('window:resize') onResize(): void {
-    this.setSizeModal()
-    this.setSizeTextarea()
+    if (this.modal.visible) {
+      this.setSizeModal()
+      this.setSizeTextarea()
+    }
   }
 
   writeValue(value: string): void {
@@ -54,15 +56,18 @@ export class VgInputComponent implements ControlValueAccessor, OnInit, OnDestroy
   }
 
   refresh(): void {
+    if (!this.modal.visible) {
+      this.hideModal()
+      return
+    }
+
     const h: number = window.visualViewport?.height || 0
 
     this.setSizeModal()
     this.setSizeTextarea()
 
     if (this.prevHeight !== h) {
-      this.modal.visible = false
-      clearInterval(this.intervalRefresh)
-      this.textarea.nativeElement.blur()
+      this.hideModal()
     }
 
     this.prevHeight = h
@@ -97,9 +102,15 @@ export class VgInputComponent implements ControlValueAccessor, OnInit, OnDestroy
     }, 50)
   }
 
+  hideModal(): void {
+    this.modal.visible = false
+    clearInterval(this.intervalRefresh)
+    this.textarea.nativeElement.blur()
+  }
+
   onClickInput(e: any): void {
     e.preventDefault()
-    
+    this.showModal()
   }
 
   onInputTextarea(e: any): void {
