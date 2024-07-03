@@ -56,6 +56,9 @@ export class VgInputComponent implements ControlValueAccessor, OnInit, OnDestroy
   refresh(): void {
     const h: number = window.visualViewport?.height || 0
 
+    this.setSizeModal()
+    this.setSizeTextarea()
+
     if (this.prevHeight !== h) {
       this.modal.visible = false
       clearInterval(this.intervalRefresh)
@@ -89,8 +92,8 @@ export class VgInputComponent implements ControlValueAccessor, OnInit, OnDestroy
       setTimeout(() => {
         this.prevHeight = window.visualViewport?.height || 0
         this.intervalRefresh = setInterval(() => { this.refresh() })
-      }, 500)
-    }, 500)
+      }, 0)
+    }, 0)
   }
 
   onInputTextarea(e: any): void {
