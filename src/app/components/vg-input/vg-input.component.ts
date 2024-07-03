@@ -109,6 +109,7 @@ export class VgInputComponent implements ControlValueAccessor, OnInit, OnDestroy
 
   showModal(): void {
     this.prevBodyOverflow = document.body.style.overflow
+    document.body.style.position = 'fixed'
     document.body.style.overflow = 'hidden'
     this.modal.visible = true
     this.checkError()
@@ -125,6 +126,7 @@ export class VgInputComponent implements ControlValueAccessor, OnInit, OnDestroy
 
   hideModal(): void {
     document.body.style.overflow = this.prevBodyOverflow
+    document.body.style.position = ''
     this.modal.visible = false
     clearInterval(this.intervalRefresh)
     this.textarea.nativeElement.blur()
