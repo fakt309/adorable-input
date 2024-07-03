@@ -92,7 +92,7 @@ export class VgInputComponent implements ControlValueAccessor, OnInit, OnDestroy
       setTimeout(() => {
         this.prevHeight = window.visualViewport?.height || 0
         this.intervalRefresh = setInterval(() => { this.refresh() })
-      }, 0)
+      }, 500)
     }, 0)
   }
 
