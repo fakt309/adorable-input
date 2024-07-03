@@ -85,8 +85,10 @@ export class VgInputComponent implements ControlValueAccessor, OnInit, OnDestroy
     setTimeout(() => {
       this.textarea.nativeElement.focus()
       this.setSizeTextarea()
+      setTimeout(() => {
+        this.intervalRefresh = setInterval(() => { this.refresh() })
+      }, 0)
     }, 0)
-    this.intervalRefresh = setInterval(() => { this.refresh() })
   }
 
   onInputTextarea(e: any): void {
