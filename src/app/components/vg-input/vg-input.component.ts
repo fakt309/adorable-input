@@ -80,15 +80,17 @@ export class VgInputComponent implements ControlValueAccessor, OnInit, OnDestroy
     textarea.style.height = `${textarea.scrollHeight-paddingValue}px`
   }
 
-  onClickInput(): void {
+  onClickInput(e: any): void {
+    e.preventDefault()
+    this.prevHeight = window.visualViewport?.height || 0
     this.modal.visible = true
     setTimeout(() => {
       this.textarea.nativeElement.focus()
       this.setSizeTextarea()
       setTimeout(() => {
         this.intervalRefresh = setInterval(() => { this.refresh() })
-      }, 0)
-    }, 0)
+      }, 500)
+    }, 500)
   }
 
   onInputTextarea(e: any): void {
