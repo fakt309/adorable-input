@@ -1,0 +1,22 @@
+<div class="input" (click)="onClickInput()">{{ value }}</div>
+
+@if (modal.visible) {
+	<div
+		[style.left.px]="modal.x"
+		[style.top.px]="modal.y"
+		[style.width.px]="modal.w"
+		[style.height.px]="modal.h"
+		class="modal"
+	>
+		<div class="info">
+			<div class="title">введите имя</div>
+			<div class="rule">1 < 5 < 30</div>
+		</div>
+		<textarea
+			#textarea
+			class="textarea"
+			[style.height]="textareaHeight"
+			(input)="onInputTextarea($event)"
+		>{{ value }}</textarea>
+	</div>
+}

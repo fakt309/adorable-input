@@ -1,17 +1,20 @@
 import { Component, OnInit, HostListener } from '@angular/core'
-import { FormControl } from '@angular/forms'
+import { FormControl, ReactiveFormsModule } from '@angular/forms'
 import { VgInputComponent } from '../vg-input/vg-input.component'
 
 @Component({
   selector: 'app-page-example',
   standalone: true,
   imports: [
-    VgInputComponent
+    VgInputComponent,
+    ReactiveFormsModule
   ],
   templateUrl: './page-example.component.html',
   styleUrl: './page-example.component.scss'
 })
 export class PageExampleComponent implements OnInit {
+
+  control: FormControl = new FormControl('testing testing testing testing testing testing testing testing testing')
 
   testingWindow: any = { x: 0, y: 0, width: 0, height: 0 }
 
@@ -146,13 +149,13 @@ export class PageExampleComponent implements OnInit {
   }
 
   setSizeTesting(): void {
-    let x = window.scrollX || 0
-    let y = window.scrollY || 0
+    // let x = window.scrollX || 0
+    // let y = window.scrollY || 0
     let w = window.visualViewport?.width || 0
     let h = window.visualViewport?.height || 0
 
-    this.testingWindow.x = x
-    this.testingWindow.y = y
+    // this.testingWindow.x = 0
+    // this.testingWindow.y = 0
     this.testingWindow.width = w
     this.testingWindow.height = h
   }
