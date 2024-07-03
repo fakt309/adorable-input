@@ -119,10 +119,9 @@ export class VgInputComponent implements ControlValueAccessor, OnInit, OnDestroy
     }
     this.prevBodyOverflow = document.body.style.overflow
     this.prevBodyPosition = document.body.style.position
-
-    // prevMetaViewPort
-    document.body.style.position = 'fixed'
+    // document.body.style.position = 'fixed'
     document.body.style.overflow = 'hidden'
+    
     this.modal.visible = true
     this.checkError()
     setTimeout(() => {
@@ -138,7 +137,7 @@ export class VgInputComponent implements ControlValueAccessor, OnInit, OnDestroy
 
   hideModal(): void {
     document.body.style.overflow = this.prevBodyOverflow
-    document.body.style.position = this.prevBodyPosition
+    // document.body.style.position = this.prevBodyPosition
     let metaViewport = document.querySelector('meta[name="viewport"]')
     if (metaViewport) {
       this.renderer.setAttribute(metaViewport, 'content', this.prevMetaViewPort)
