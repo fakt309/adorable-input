@@ -132,7 +132,7 @@ export class VgInputComponent implements ControlValueAccessor, OnInit, OnDestroy
   }
 
   showModal(): void {
-    // if (this.os !== 'ios') {
+    if (this.os !== 'ios') {
       let metaViewport = document.querySelector('meta[name="viewport"]')
       if (metaViewport) {
         this.prevMetaViewPort = document.querySelector('meta[name="viewport"]')?.getAttribute('content') || ''
@@ -141,8 +141,11 @@ export class VgInputComponent implements ControlValueAccessor, OnInit, OnDestroy
       this.prevBodyOverflow = document.body.style.overflow
       this.prevBodyPosition = document.body.style.position
       document.body.style.overflow = 'hidden'
+      
+    } else {
+      document.body.style.overflow = 'hidden'
       document.body.style.position = 'fixed'
-    // }
+    }
     this.modal.visible = true
     this.checkError()
 
