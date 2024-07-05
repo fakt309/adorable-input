@@ -151,7 +151,6 @@ export class VgInputComponent implements ControlValueAccessor, OnInit, OnDestroy
       // The keyboard is open. Now do a delayed focus on the target element
       return new Promise(res => {
         setTimeout(() => {
-          console.log('gogogo')
           el.focus()
           el.click()
           el.setSelectionRange(this.value.length, this.value.length)
@@ -159,7 +158,7 @@ export class VgInputComponent implements ControlValueAccessor, OnInit, OnDestroy
           document.body.removeChild(__tempEl__)
 
           res()
-        }, 500)
+        }, timeout)
       })
       
     // }
@@ -181,14 +180,13 @@ export class VgInputComponent implements ControlValueAccessor, OnInit, OnDestroy
 
     setTimeout(() => {
       this.focusAndOpenKeyboardIOS(this.textarea.nativeElement, 500).then(() => {
-        this.setSizeTextarea()
+        // this.setSizeTextarea()
         setTimeout(() => {
           this.prevHeight = window.visualViewport?.height || 0
           this.intervalRefresh = setInterval(() => { this.refresh() })
         }, 500)
-
       })
-    }, 20)
+    }, 500)
 
     // if (this.os === 'ios') {
     //   this.focusAndOpenKeyboardIOS(this.textarea.nativeElement, 500)
