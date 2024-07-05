@@ -100,7 +100,7 @@ export class VgInputComponent implements ControlValueAccessor, OnInit, OnDestroy
     this.setSizeTextarea()
 
     if (this.prevHeight < h) {
-      // this.hideModal() // to uncomment
+      this.hideModal() // to uncomment
     }
 
     this.prevHeight = h
