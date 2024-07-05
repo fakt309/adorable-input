@@ -25,6 +25,8 @@ export class VgInputComponent implements ControlValueAccessor, OnInit, OnDestroy
     res({ success: true, error: '' })
   })
 
+  os: 'windows' | 'android' | 'ios' | 'unknown' = 'unknown'
+
   value: string = ''
   onChange: Function = () => {}
   onTouched: Function = () => {}
@@ -50,6 +52,24 @@ export class VgInputComponent implements ControlValueAccessor, OnInit, OnDestroy
       this.setSizeModal()
       this.setSizeTextarea()
     }
+  }
+
+  getMobileOperatingSystem(): 'windows' | 'android' | 'ios' | 'unknown' {
+    var userAgent = navigator.userAgent || navigator.vendor || (window as any).opera
+
+    if (/windows phone/i.test(userAgent)) {
+      return 'windows'
+    }
+
+    if (/android/i.test(userAgent)) {
+      return 'android'
+    }
+
+    if (/iPad|iPhone|iPod/.test(userAgent) && !(window as any).MSStream) {
+      return 'ios'
+    }
+
+    return 'unknown'
   }
 
   writeValue(value: string): void {
@@ -121,7 +141,7 @@ export class VgInputComponent implements ControlValueAccessor, OnInit, OnDestroy
     this.prevBodyPosition = document.body.style.position
     // document.body.style.position = 'fixed'
     document.body.style.overflow = 'hidden'
-    
+
     this.modal.visible = true
     this.checkError()
     setTimeout(() => {
@@ -132,7 +152,7 @@ export class VgInputComponent implements ControlValueAccessor, OnInit, OnDestroy
         this.prevHeight = window.visualViewport?.height || 0
         this.intervalRefresh = setInterval(() => { this.refresh() })
       }, 500)
-    }, 50)
+    }, this.os === 'ios' ? 500 : 50)
   }
 
   hideModal(): void {
@@ -167,6 +187,8 @@ export class VgInputComponent implements ControlValueAccessor, OnInit, OnDestroy
   }
 
   ngOnInit(): void {
+    this.os = this.getMobileOperatingSystem()
+
     this.checkError()
     this.setSizeModal()
   }
