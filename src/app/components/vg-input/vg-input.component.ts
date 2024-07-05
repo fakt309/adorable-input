@@ -131,6 +131,40 @@ export class VgInputComponent implements ControlValueAccessor, OnInit, OnDestroy
     textarea.style.height = `${textarea.scrollHeight-paddingValue}px`
   }
 
+  async focusAndOpenKeyboardIOS(el: any, timeout: number): Promise<void> {
+    if (!timeout) {
+      timeout = 100
+    }
+    if (el) {
+      // Align temp input element approximately where the input element is
+      // so the cursor doesn't jump around
+      let __tempEl__ = document.createElement('input')
+      __tempEl__.style.position = 'absolute'
+      __tempEl__.style.top = (el.offsetTop + 7) + 'px'
+      __tempEl__.style.left = el.offsetLeft + 'px'
+      __tempEl__.style.height = `0`
+      __tempEl__.style.opacity = `0`
+      // Put this temp element as a child of the page <body> and focus on it
+      document.body.appendChild(__tempEl__)
+      __tempEl__.focus()
+
+      // The keyboard is open. Now do a delayed focus on the target element
+      new Promise(res => {
+        setTimeout(() => {
+          console.log('gogogo')
+          el.focus()
+          el.click()
+          el.setSelectionRange(this.value.length, this.value.length)
+          // Remove the temp element
+          document.body.removeChild(__tempEl__)
+
+          res(true)
+        }, timeout)
+      })
+      
+    }
+  }
+
   showModal(): void {
     let metaViewport = document.querySelector('meta[name="viewport"]')
     if (metaViewport) {
@@ -144,15 +178,33 @@ export class VgInputComponent implements ControlValueAccessor, OnInit, OnDestroy
 
     this.modal.visible = true
     this.checkError()
+
     setTimeout(() => {
-      this.textarea.nativeElement.focus()
-      this.textarea.nativeElement.setSelectionRange(this.value.length, this.value.length)
-      this.setSizeTextarea()
-      setTimeout(() => {
-        this.prevHeight = window.visualViewport?.height || 0
-        this.intervalRefresh = setInterval(() => { this.refresh() })
-      }, 500)
-    }, this.os === 'ios' ? 500 : 50)
+      this.focusAndOpenKeyboardIOS(this.textarea.nativeElement, 500).then(() => {
+
+        this.setSizeTextarea()
+        setTimeout(() => {
+          this.prevHeight = window.visualViewport?.height || 0
+          this.intervalRefresh = setInterval(() => { this.refresh() })
+        }, 500)
+
+      })
+    }, 20)
+
+    // if (this.os === 'ios') {
+    //   this.focusAndOpenKeyboardIOS(this.textarea.nativeElement, 500)
+    // } else {
+    //   setTimeout(() => {
+    //     this.textarea.nativeElement.focus()
+    //     this.textarea.nativeElement.setSelectionRange(this.value.length, this.value.length)
+    //     this.setSizeTextarea()
+    //     setTimeout(() => {
+    //       this.prevHeight = window.visualViewport?.height || 0
+    //       this.intervalRefresh = setInterval(() => { this.refresh() })
+    //     }, 500)
+    //   }, 50)
+    // }
+    
   }
 
   hideModal(): void {
