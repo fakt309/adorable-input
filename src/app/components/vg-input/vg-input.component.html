@@ -1,9 +1,14 @@
 @if (os === 'ios') {
-	<input
-		class="input"
-		[value]="value"
+	<textarea
+		class="input input_textarea"
+		[class.input_error]="error !== ''"
 		(input)="onInputTextarea($event)"
-	/>
+		rows="1"
+	>{{ value }}</textarea>
+	<div
+		class="input-right"
+		[class.input_error]="error !== ''"
+	></div>
 } @else {
 	<div
 		class="input"

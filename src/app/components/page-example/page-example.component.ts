@@ -14,7 +14,7 @@ import { VgInputComponent } from '../vg-input/vg-input.component'
 })
 export class PageExampleComponent implements OnInit {
 
-  control: FormControl = new FormControl('testing testing testing testing testing testing testing testing testing')
+  control: FormControl = new FormControl('o')
 
   rule: (t1: string) => Promise<{ success: boolean; error: string }> = async (value: string): Promise<{ success: boolean; error: string }> => new Promise((res) => {
     if (value.length < 3) {

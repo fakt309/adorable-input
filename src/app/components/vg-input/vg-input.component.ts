@@ -178,9 +178,10 @@ export class VgInputComponent implements ControlValueAccessor, OnInit, OnDestroy
     this.value = value
     this.onChange(value)
 
+    this.checkError()
+
     if (this.os !== 'ios') {
       this.setSizeTextarea()
-      this.checkError()
     }
 
   }
@@ -188,7 +189,8 @@ export class VgInputComponent implements ControlValueAccessor, OnInit, OnDestroy
   ngOnInit(): void {
     this.os = this.getMobileOperatingSystem()
 
-    this.checkError()
+    setTimeout(() => { this.checkError() }, 100)
+    
     this.setSizeModal()
   }
 
