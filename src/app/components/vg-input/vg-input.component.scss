@@ -123,6 +123,11 @@
 		text-align: center;
 	}
 
+	.title_input {
+		margin: 0px 10px;
+		font-size: 14px;
+	}
+
 	.rule {
 		margin: 20px;
 		margin-top: 0px;
@@ -132,7 +137,7 @@
 	}
 
 	.rule_input {
-		margin: 0px 20px;
+		margin: 0px 10px;
 		opacity: 1;
 		height: 10px;
 		transition: all ease 0.2s;
