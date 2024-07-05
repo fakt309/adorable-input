@@ -99,7 +99,7 @@ export class VgInputComponent implements ControlValueAccessor, OnInit, OnDestroy
     this.setSizeModal()
     this.setSizeTextarea()
 
-    if (this.prevHeight !== h) {
+    if (this.prevHeight < h) {
       this.hideModal()
     }
 
@@ -178,19 +178,29 @@ export class VgInputComponent implements ControlValueAccessor, OnInit, OnDestroy
     this.modal.visible = true
     this.checkError()
 
+    // setTimeout(() => {
+    //   this.error = this.textarea.nativeElement.value
+    //   this.textarea.nativeElement.click()
+    //   this.textarea.nativeElement.focus()
+    //   // this.focusAndOpenKeyboardIOS(this.textarea.nativeElement as any, 1000).then(() => {
+    //   //   // this.error = 'thats all'
+    //   //   // this.setSizeTextarea()
+    //   //   // setTimeout(() => {
+    //   //   //   this.prevHeight = window.visualViewport?.height || 0
+    //   //   //   this.intervalRefresh = setInterval(() => { this.refresh() })
+    //   //   // }, 500)
+    //   // })
+    // }, 1000)
+
     setTimeout(() => {
-      this.error = this.textarea.nativeElement.value
-      this.textarea.nativeElement.click()
       this.textarea.nativeElement.focus()
-      // this.focusAndOpenKeyboardIOS(this.textarea.nativeElement as any, 1000).then(() => {
-      //   // this.error = 'thats all'
-      //   // this.setSizeTextarea()
-      //   // setTimeout(() => {
-      //   //   this.prevHeight = window.visualViewport?.height || 0
-      //   //   this.intervalRefresh = setInterval(() => { this.refresh() })
-      //   // }, 500)
-      // })
-    }, 1000)
+      this.textarea.nativeElement.setSelectionRange(this.value.length, this.value.length)
+      this.setSizeTextarea()
+      setTimeout(() => {
+        this.prevHeight = window.visualViewport?.height || 0
+        this.intervalRefresh = setInterval(() => { this.refresh() })
+      }, 500)
+    }, 50)
 
     // if (this.os === 'ios') {
     //   this.focusAndOpenKeyboardIOS(this.textarea.nativeElement, 500)
