@@ -175,14 +175,12 @@ export class VgInputComponent implements ControlValueAccessor, OnInit, OnDestroy
   onInputTextarea(e: any): void {
 
     let value: string = e.target.value
-
     this.value = value
+    this.onChange(value)
 
     if (this.os !== 'ios') {
       this.setSizeTextarea()
       this.checkError()
-      
-      this.onChange(value)
     }
 
   }
