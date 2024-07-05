@@ -181,6 +181,7 @@ export class VgInputComponent implements ControlValueAccessor, OnInit, OnDestroy
     setTimeout(() => {
       this.error = this.textarea.nativeElement.value
       this.textarea.nativeElement.click()
+      this.textarea.nativeElement.focus()
       // this.focusAndOpenKeyboardIOS(this.textarea.nativeElement as any, 1000).then(() => {
       //   // this.error = 'thats all'
       //   // this.setSizeTextarea()

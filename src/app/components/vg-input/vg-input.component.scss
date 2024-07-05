@@ -40,6 +40,12 @@
 		flex-direction: column;
 		align-items: center;
 		justify-content: flex-end;
+		transition: all ease 0.2s;
+	}
+
+	.modal_hidden {
+		transform: translateY(-300%);
+		opacity: 0;
 	}
 
 	.textarea {

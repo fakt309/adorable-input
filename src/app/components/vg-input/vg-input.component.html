@@ -4,13 +4,14 @@
 	(click)="onClickInput($event)"
 >{{ value }}</div>
 
-@if (modal.visible) {
+
 	<div
 		[style.left.px]="modal.x"
 		[style.top.px]="modal.y"
 		[style.width.px]="modal.w"
 		[style.height.px]="modal.h"
 		class="modal"
+		[class.modal_hidden]="!modal.visible"
 	>
 		<div class="info">
 			<div class="title">{{ title }}</div>
@@ -26,4 +27,3 @@
 			(input)="onInputTextarea($event)"
 		>{{ value }}</textarea>
 	</div>
-}
