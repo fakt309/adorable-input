@@ -100,7 +100,7 @@ export class VgInputComponent implements ControlValueAccessor, OnInit, OnDestroy
     this.setSizeTextarea()
 
     if (this.prevHeight < h) {
-      this.hideModal()
+      // this.hideModal() // to uncomment
     }
 
     this.prevHeight = h
@@ -116,9 +116,11 @@ export class VgInputComponent implements ControlValueAccessor, OnInit, OnDestroy
   }
 
   setSizeModal(): void {
+    let y = window.scrollY || 0
     let w = window.visualViewport?.width || 0
     let h = window.visualViewport?.height || 0
 
+    this.modal.y = y
     this.modal.w = w
     this.modal.h = h
   }
