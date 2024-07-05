@@ -1,23 +1,24 @@
-<div
-	class="input"
-	[class.input_error]="error !== ''"
-	(click)="onClickInput($event)"
->{{ value }}</div>
+@if (os === 'ios') {
+	<input class="input" (input)="onInputTextarea($event)" />
+} @else {
+	<div
+		class="input"
+		[class.input_error]="error !== ''"
+		(click)="onClickInput($event)"
+	>{{ value }}</div>
+}
 
-
+@if (modal.visible) {
 	<div
 		[style.left.px]="modal.x"
 		[style.top.px]="modal.y"
 		[style.width.px]="modal.w"
 		[style.height.px]="modal.h"
 		class="modal"
-		[class.modal_hidden]="!modal.visible"
 	>
 		<div class="info">
 			<div class="title">{{ title }}</div>
 			@if (error !== '') { <div class="rule">{{ error }}</div> }
-
-			<div class="rule">{{ os }}</div>
 		</div>
 		<textarea
 			#textarea
@@ -27,3 +28,4 @@
 			(input)="onInputTextarea($event)"
 		>{{ value }}</textarea>
 	</div>
+}

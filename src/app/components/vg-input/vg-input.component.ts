@@ -42,7 +42,6 @@ export class VgInputComponent implements ControlValueAccessor, OnInit, OnDestroy
 
   prevHeight: number = window.visualViewport?.height || 0
   prevBodyOverflow: string = ''
-  prevBodyPosition: string = ''
   prevMetaViewPort: string = ''
 
   constructor(private renderer: Renderer2) {}
@@ -131,39 +130,6 @@ export class VgInputComponent implements ControlValueAccessor, OnInit, OnDestroy
     textarea.style.height = `${textarea.scrollHeight-paddingValue}px`
   }
 
-  async focusAndOpenKeyboardIOS(el: any, timeout: number): Promise<void> {
-    // if (!timeout) {
-    //   timeout = 100
-    // }
-    // if (el) {
-      // Align temp input element approximately where the input element is
-      // so the cursor doesn't jump around
-      let __tempEl__ = document.createElement('input')
-      __tempEl__.style.position = 'absolute'
-      __tempEl__.style.top = (el.offsetTop + 7) + 'px'
-      __tempEl__.style.left = el.offsetLeft + 'px'
-      __tempEl__.style.height = `0`
-      __tempEl__.style.opacity = `0`
-      // Put this temp element as a child of the page <body> and focus on it
-      document.body.appendChild(__tempEl__)
-      __tempEl__.focus()
-
-      // The keyboard is open. Now do a delayed focus on the target element
-      return new Promise(res => {
-        setTimeout(() => {
-          el.focus()
-          el.click()
-          el.setSelectionRange(this.value.length, this.value.length)
-          // Remove the temp element
-          document.body.removeChild(__tempEl__)
-
-          res()
-        }, timeout)
-      })
-      
-    // }
-  }
-
   showModal(): void {
     if (this.os !== 'ios') {
       let metaViewport = document.querySelector('meta[name="viewport"]')
@@ -172,26 +138,10 @@ export class VgInputComponent implements ControlValueAccessor, OnInit, OnDestroy
         this.renderer.setAttribute(metaViewport, 'content', 'width=device-width, height=device-height, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, interactive-widget=resizes-content')
       }
       this.prevBodyOverflow = document.body.style.overflow
-      this.prevBodyPosition = document.body.style.position
-      // document.body.style.position = 'fixed'
       document.body.style.overflow = 'hidden'
     }
     this.modal.visible = true
     this.checkError()
-
-    // setTimeout(() => {
-    //   this.error = this.textarea.nativeElement.value
-    //   this.textarea.nativeElement.click()
-    //   this.textarea.nativeElement.focus()
-    //   // this.focusAndOpenKeyboardIOS(this.textarea.nativeElement as any, 1000).then(() => {
-    //   //   // this.error = 'thats all'
-    //   //   // this.setSizeTextarea()
-    //   //   // setTimeout(() => {
-    //   //   //   this.prevHeight = window.visualViewport?.height || 0
-    //   //   //   this.intervalRefresh = setInterval(() => { this.refresh() })
-    //   //   // }, 500)
-    //   // })
-    // }, 1000)
 
     setTimeout(() => {
       this.textarea.nativeElement.focus()
@@ -202,31 +152,14 @@ export class VgInputComponent implements ControlValueAccessor, OnInit, OnDestroy
         this.intervalRefresh = setInterval(() => { this.refresh() })
       }, 500)
     }, 50)
-
-    // if (this.os === 'ios') {
-    //   this.focusAndOpenKeyboardIOS(this.textarea.nativeElement, 500)
-    // } else {
-    //   setTimeout(() => {
-    //     this.textarea.nativeElement.focus()
-    //     this.textarea.nativeElement.setSelectionRange(this.value.length, this.value.length)
-    //     this.setSizeTextarea()
-    //     setTimeout(() => {
-    //       this.prevHeight = window.visualViewport?.height || 0
-    //       this.intervalRefresh = setInterval(() => { this.refresh() })
-    //     }, 500)
-    //   }, 50)
-    // }
     
   }
 
   hideModal(): void {
-    if (this.os !== 'ios') {
-      document.body.style.overflow = this.prevBodyOverflow
-      // document.body.style.position = this.prevBodyPosition
-      let metaViewport = document.querySelector('meta[name="viewport"]')
-      if (metaViewport) {
-        this.renderer.setAttribute(metaViewport, 'content', this.prevMetaViewPort)
-      }
+    document.body.style.overflow = this.prevBodyOverflow
+    let metaViewport = document.querySelector('meta[name="viewport"]')
+    if (metaViewport) {
+      this.renderer.setAttribute(metaViewport, 'content', this.prevMetaViewPort)
     }
 
     this.modal.visible = false
@@ -245,10 +178,12 @@ export class VgInputComponent implements ControlValueAccessor, OnInit, OnDestroy
 
     this.value = value
 
-    this.setSizeTextarea()
-    this.checkError()
-    
-    this.onChange(value)
+    if (this.os !== 'ios') {
+      this.setSizeTextarea()
+      this.checkError()
+      
+      this.onChange(value)
+    }
 
   }
 
