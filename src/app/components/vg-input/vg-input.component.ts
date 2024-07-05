@@ -132,10 +132,10 @@ export class VgInputComponent implements ControlValueAccessor, OnInit, OnDestroy
   }
 
   async focusAndOpenKeyboardIOS(el: any, timeout: number): Promise<void> {
-    if (!timeout) {
-      timeout = 100
-    }
-    if (el) {
+    // if (!timeout) {
+    //   timeout = 100
+    // }
+    // if (el) {
       // Align temp input element approximately where the input element is
       // so the cursor doesn't jump around
       let __tempEl__ = document.createElement('input')
@@ -149,7 +149,7 @@ export class VgInputComponent implements ControlValueAccessor, OnInit, OnDestroy
       __tempEl__.focus()
 
       // The keyboard is open. Now do a delayed focus on the target element
-      new Promise(res => {
+      return new Promise(res => {
         setTimeout(() => {
           console.log('gogogo')
           el.focus()
@@ -158,11 +158,11 @@ export class VgInputComponent implements ControlValueAccessor, OnInit, OnDestroy
           // Remove the temp element
           document.body.removeChild(__tempEl__)
 
-          res(true)
-        }, timeout)
+          res()
+        }, 500)
       })
       
-    }
+    // }
   }
 
   showModal(): void {
@@ -181,7 +181,6 @@ export class VgInputComponent implements ControlValueAccessor, OnInit, OnDestroy
 
     setTimeout(() => {
       this.focusAndOpenKeyboardIOS(this.textarea.nativeElement, 500).then(() => {
-
         this.setSizeTextarea()
         setTimeout(() => {
           this.prevHeight = window.visualViewport?.height || 0
