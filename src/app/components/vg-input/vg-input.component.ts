@@ -146,7 +146,7 @@ export class VgInputComponent implements ControlValueAccessor, OnInit, OnDestroy
       
     } else {
       document.body.style.overflow = 'hidden'
-      document.body.style.position = 'fixed'
+      // document.body.style.position = 'fixed'
     }
     this.modal.visible = true
     this.checkError()
