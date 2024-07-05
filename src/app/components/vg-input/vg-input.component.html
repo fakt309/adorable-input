@@ -1,4 +1,4 @@
-@if (os === 'ios') {
+<!-- @if (os === 'ios') {
 	<div
 		class="title title_input"
 	>{{ title }}</div>
@@ -18,13 +18,13 @@
 		class="rule rule_input"
 		[class.rule_input-hide]="error === ''"
 	>{{ error }}</div>
-} @else {
+} @else { -->
 	<div
 		class="input"
 		[class.input_error]="error !== ''"
 		(click)="onClickInput($event)"
 	>{{ value }}</div>
-}
+<!-- } -->
 
 @if (modal.visible) {
 	<div
