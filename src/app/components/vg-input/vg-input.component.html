@@ -1,5 +1,9 @@
 @if (os === 'ios') {
-	<input class="input" (input)="onInputTextarea($event)" />
+	<input
+		class="input"
+		[value]="value"
+		(input)="onInputTextarea($event)"
+	/>
 } @else {
 	<div
 		class="input"
