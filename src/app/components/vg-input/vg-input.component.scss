@@ -1,9 +1,26 @@
 :host {
 	font-family: Arial;
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	align-items: flex-start;
 	justify-content: flex-start;
+
+	.row {
+		display: flex;
+		flex-direction: row;
+		align-items: flex-start;
+		justify-content: flex-start;
+	}
+
+	.rule_input {
+		opacity: 1;
+		height: 10px;
+		transition: all ease 0.2s;
+	}
+
+	.rule_input-hide {
+		opacity: 0;
+	}
 
 	.input {
 		padding: 10px 20px;
@@ -21,6 +38,7 @@
 		cursor: text;
 		user-select: none;
 		outline: none;
+		font-family: Arial;
 		transition-property: background-color;
 		transition-duration: 0.2s;
 		transition-timing-function: ease;
@@ -113,7 +131,7 @@
 	.rule {
 		margin: 20px;
 		margin-top: 0px;
-		color: #f44336;
+		color: #ef9a9a;
 		font-size: 14px;
 		text-align: center;
 	}

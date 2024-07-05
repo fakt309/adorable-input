@@ -1,21 +1,27 @@
-<!-- @if (os === 'ios') {
-	<textarea
-		class="input input_textarea"
-		[class.input_error]="error !== ''"
-		(input)="onInputTextarea($event)"
-		rows="1"
-	>{{ value }}</textarea>
+@if (os === 'ios') {
+	<div class="row">
+		<textarea
+			class="input input_textarea"
+			[class.input_error]="error !== ''"
+			(input)="onInputTextarea($event)"
+			rows="1"
+		>{{ value }}</textarea>
+		<div
+			class="input-right"
+			[class.input_error]="error !== ''"
+		></div>
+	</div>
 	<div
-		class="input-right"
-		[class.input_error]="error !== ''"
-	></div>
-} @else { -->
+		class="rule rule_input"
+		[class.rule_input-hide]="error === ''"
+	>{{ error }}</div>
+} @else {
 	<div
 		class="input"
 		[class.input_error]="error !== ''"
 		(click)="onClickInput($event)"
 	>{{ value }}</div>
-<!-- } -->
+}
 
 @if (modal.visible) {
 	<div
