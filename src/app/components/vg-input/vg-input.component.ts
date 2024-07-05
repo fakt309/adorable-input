@@ -96,8 +96,8 @@ export class VgInputComponent implements ControlValueAccessor, OnInit, OnDestroy
 
     const h: number = window.visualViewport?.height || 0
 
-    // this.setSizeModal()
-    // this.setSizeTextarea()
+    this.setSizeModal()
+    this.setSizeTextarea()
 
     if (this.prevHeight < h) {
       this.hideModal() // to uncomment
