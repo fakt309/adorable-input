@@ -143,9 +143,8 @@ export class VgInputComponent implements ControlValueAccessor, OnInit, OnDestroy
       this.prevBodyOverflow = document.body.style.overflow
       this.prevBodyPosition = document.body.style.position
       document.body.style.overflow = 'hidden'
-      
     } else {
-      document.body.style.overflow = 'hidden'
+      // document.body.style.overflow = 'hidden'
       // document.body.style.position = 'fixed'
     }
     this.modal.visible = true
@@ -164,11 +163,13 @@ export class VgInputComponent implements ControlValueAccessor, OnInit, OnDestroy
   }
 
   hideModal(): void {
-    document.body.style.overflow = this.prevBodyOverflow
-    document.body.style.position = this.prevBodyPosition
-    let metaViewport = document.querySelector('meta[name="viewport"]')
-    if (metaViewport) {
-      this.renderer.setAttribute(metaViewport, 'content', this.prevMetaViewPort)
+    if (this.os !== 'ios') {
+      document.body.style.overflow = this.prevBodyOverflow
+      document.body.style.position = this.prevBodyPosition
+      let metaViewport = document.querySelector('meta[name="viewport"]')
+      if (metaViewport) {
+        this.renderer.setAttribute(metaViewport, 'content', this.prevMetaViewPort)
+      }
     }
 
     this.modal.visible = false
