@@ -42,6 +42,7 @@ export class VgInputComponent implements ControlValueAccessor, OnInit, OnDestroy
 
   prevHeight: number = window.visualViewport?.height || 0
   prevBodyOverflow: string = ''
+  prevBodyPosition: string = ''
   prevMetaViewPort: string = ''
 
   constructor(private renderer: Renderer2) {}
@@ -131,15 +132,17 @@ export class VgInputComponent implements ControlValueAccessor, OnInit, OnDestroy
   }
 
   showModal(): void {
-    if (this.os !== 'ios') {
+    // if (this.os !== 'ios') {
       let metaViewport = document.querySelector('meta[name="viewport"]')
       if (metaViewport) {
         this.prevMetaViewPort = document.querySelector('meta[name="viewport"]')?.getAttribute('content') || ''
         this.renderer.setAttribute(metaViewport, 'content', 'width=device-width, height=device-height, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, interactive-widget=resizes-content')
       }
       this.prevBodyOverflow = document.body.style.overflow
+      this.prevBodyPosition = document.body.style.position
       document.body.style.overflow = 'hidden'
-    }
+      document.body.style.position = 'fixed'
+    // }
     this.modal.visible = true
     this.checkError()
 
@@ -157,6 +160,7 @@ export class VgInputComponent implements ControlValueAccessor, OnInit, OnDestroy
 
   hideModal(): void {
     document.body.style.overflow = this.prevBodyOverflow
+    document.body.style.position = this.prevBodyPosition
     let metaViewport = document.querySelector('meta[name="viewport"]')
     if (metaViewport) {
       this.renderer.setAttribute(metaViewport, 'content', this.prevMetaViewPort)

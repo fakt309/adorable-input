@@ -1,4 +1,4 @@
-@if (os === 'ios') {
+<!-- @if (os === 'ios') {
 	<textarea
 		class="input input_textarea"
 		[class.input_error]="error !== ''"
@@ -9,13 +9,13 @@
 		class="input-right"
 		[class.input_error]="error !== ''"
 	></div>
-} @else {
+} @else { -->
 	<div
 		class="input"
 		[class.input_error]="error !== ''"
 		(click)="onClickInput($event)"
 	>{{ value }}</div>
-}
+<!-- } -->
 
 @if (modal.visible) {
 	<div
